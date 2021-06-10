@@ -34,7 +34,7 @@ def status_data_changes=0
 		 //def status = bat returnStatus: true, script:'call Tools\\CI-Build.cmd'
 		def status = bat returnStatus: true, script:"Call exit | sqlplus ${SCHEMA1}/${CI_PASSWORD}@//localhost:1521/${CI_SERVICE} @Tools/DropAllObjects.sql"
 		  	
-    	status = bat returnStatus: true, label: "snapshot", script:"${SQLCOMPARE} /i:sdwgvac /b:hdrg /forceservicename /source:db-state{${SCHEMAS}} /snp:release_state.onp"
+    	status = bat returnStatus: true, label: "snapshot", script:"${SQLCOMPARE} /i:sdwgvac /b:hdrg /forceservicename /source:OracleDbDemo\Database{${SCHEMAS}} /snp:release_state.onp"
 		archiveArtifacts allowEmptyArchive: true, artifacts:'release_state.onp'
 
     	status = bat returnStatus: true, label: "build", script:"${SQLCOMPARE} /deploy /i:sdwgvac /source:release_state.onp{${SCHEMAS}} /target:${CI_USER}/${CI_PASSWORD}@localhost/${CI_SERVICE}{${SCHEMAS}} /forceservicename /sf:schema_creation.sql /report:all_objects.html"
@@ -103,7 +103,7 @@ stage ('Unit Tests') {
 
 		
 		// are there data changes? leaving this out until we understand issues with static data comparison.
-//		def status_data_changes = bat returnStatus: true, label: "data deployment script and report", script:"${SQLDATACOMPARE} /source:db-state{${SCHEMAS}} /target:${PROD_USER}/${PROD_PASSWORD}@localhost/${PROD_SERVICE}{${SCHEMAS}} /forceservicename /reporttype:HTML /report:data_changes.html /scriptfile:data_update.sql /overwritereports"
+//		def status_data_changes = bat returnStatus: true, label: "data deployment script and report", script:"${SQLDATACOMPARE} /source:OracleDbDemo\Database{${SCHEMAS}} /target:${PROD_USER}/${PROD_PASSWORD}@localhost/${PROD_SERVICE}{${SCHEMAS}} /forceservicename /reporttype:HTML /report:data_changes.html /scriptfile:data_update.sql /overwritereports"
 //		archiveArtifacts allowEmptyArchive: true, artifacts: 'data_update.sql, data_changes.html'
 //		echo "status_data_changes:$status_data_changes"
 
