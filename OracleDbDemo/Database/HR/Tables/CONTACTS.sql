@@ -8,6 +8,8 @@ CREATE TABLE hr.contacts (
   zipcode VARCHAR2(10 BYTE),
   email VARCHAR2(24 BYTE) NOT NULL,
   phone_number VARCHAR2(20 BYTE),
+  twitter_id VARCHAR2(20 BYTE),
+  linkedin_in VARCHAR2(50 BYTE),
   CONSTRAINT contacts_pk PRIMARY KEY (contact_id)
 );
 COMMENT ON COLUMN hr.contacts.contact_id IS 'Contact ID';
