@@ -56,7 +56,7 @@ def status_data_changes=0
 	 
   stage ('Code Analysis') {
     status = bat returnStatus: true, script: "dotnet \"C:\\Program Files\\Red Gate\\Code Analysis for Oracle\\cao.cmd.dll\" /source:sql /warning:CreateTableStatement;INModeExplicit;UseASWithAlias /outfile:_code_analysis_results.html -IAgreeToTheEula"
-    //status = bat returnStatus: true, script:"dotnet Tools/cao/cao.cmd.dll /source:sql /warning:CreateTableStatement;INModeExplicit;UseASWithAlias /outfile:_code_analysis_results.html"
+    //status = bat returnStatus: true, script:"dotnet Tools/cao/cao.cmd.dll /source:OracleDbDemo/Database /warning:CreateTableStatement;INModeExplicit;UseASWithAlias /outfile:_code_analysis_results.html"
     echo "Status for Static Code Analysis:$status"
     archiveArtifacts allowEmptyArchive: true, artifacts:'_code_analysis_results.html'
     if (status != 0)
