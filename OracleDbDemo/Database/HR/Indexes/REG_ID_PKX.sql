@@ -1,1 +1,0 @@
-CREATE UNIQUE INDEX hr.reg_id_pkx ON hr.regions(region_id);

@@ -1,1 +1,0 @@
-CREATE UNIQUE INDEX hr.country_c_id_pkx ON hr.countries(country_id);
